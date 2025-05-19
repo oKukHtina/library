@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class User {
     private final String username;
@@ -32,6 +33,18 @@ public class User {
             takenBooksList.remove(removedBook);
         }
         return removedBook;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(username, user.username) && Objects.equals(takenBooksList, user.takenBooksList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, takenBooksList);
     }
 
     @Override

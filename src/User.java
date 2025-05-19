@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class User {
+public final class User {
     private final String username;
     private final List<Book> takenBooksList;
 
@@ -24,7 +24,7 @@ public class User {
         takenBooksList.add(book);
     }
 
-    public Book removeTakenBook(String title) {
+    public Book removeTakenBook(final String title) {
         Book removedBook = takenBooksList.stream()
                 .filter(book -> book.getTitle().equals(title))
                 .findFirst()
@@ -37,9 +37,11 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(username, user.username) && Objects.equals(takenBooksList, user.takenBooksList);
+        return Objects.equals(username, user.username)
+                && Objects.equals(takenBooksList, user.takenBooksList);
     }
 
     @Override
